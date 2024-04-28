@@ -1,11 +1,13 @@
 package pizzadelivery.cis434finalproject;
 
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -69,12 +71,23 @@ public class MainApplication extends Application {
         toppingsGrid.add(mushroomsCheckbox, 1, 0);
         toppingsGrid.add(olivesCheckbox, 2, 0);
 
+        // Address Fields
+        Label addressLabel = new Label("Enter Delivery Address:");
+        TextField streetField = new TextField();
+        streetField.setPromptText("Street Address");
+        TextField cityField = new TextField();
+        cityField.setPromptText("City");
+        TextField stateField = new TextField();
+        stateField.setPromptText("State");
+        TextField postalCodeField = new TextField();
+        postalCodeField.setPromptText("Postal Code");
+
         // Order Button
         Button orderButton = new Button("Place Order");
         orderButton.setStyle("-fx-background-color: darksalmon; -fx-text-fill: white;");
-        orderButton.setOnAction(e -> displayOrder(sizeComboBox.getValue(), pepperoniCheckbox, mushroomsCheckbox, olivesCheckbox));
+        orderButton.setOnAction(e -> displayOrder(sizeComboBox.getValue(),streetField.getText(), cityField.getText(), postalCodeField.getText(),stateField.getText(), pepperoniCheckbox, mushroomsCheckbox, olivesCheckbox));
 
-        menuBox.getChildren().addAll(headerLabel, sizeSelection, toppingLabel, toppingsGrid, orderButton);
+        menuBox.getChildren().addAll(headerLabel, sizeSelection, toppingLabel, toppingsGrid, addressLabel, streetField, cityField, stateField, postalCodeField, orderButton);
         mainLayout.setTop(menuBox);
     }
 
@@ -85,7 +98,7 @@ public class MainApplication extends Application {
         mainLayout.setCenter(orderResults);
     }
 
-    private void displayOrder(String selectedSize, CheckBox... toppings) {
+    private void displayOrder(String selectedSize, String street, String city, String state, String postalCode, CheckBox... toppings) {
         orderResults.getChildren().clear(); // Clear previous results
         if (selectedSize == null || selectedSize.isEmpty()) {
             orderResults.getChildren().add(new Label("Please select a pizza size."));
@@ -116,12 +129,17 @@ public class MainApplication extends Application {
         receipt.append("Service Fee: $").append(String.format("%.2f", serviceFee)).append("\n");
 
         // Calculate total
-        receipt.append("Total: $").append(String.format("%.2f", total));
+        receipt.append("Total: $").append(String.format("%.2f", total)).append("\n------\n");
+
+        // Address details
+        receipt.append("Delivery Address:\n");
+        receipt.append(street).append(", ").append(city).append(", ").append(postalCode).append(", ").append(state);
+
         orderResults.getChildren().add(new Label(receipt.toString()));
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
-

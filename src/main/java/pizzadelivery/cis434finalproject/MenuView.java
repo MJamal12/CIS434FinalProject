@@ -1,12 +1,9 @@
 package pizzadelivery.cis434finalproject;
 
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.CheckBox;
 
 public class MenuView {
     private BorderPane mainLayout;
@@ -31,15 +28,32 @@ public class MenuView {
         toppingsGrid.add(topping2, 1, 0);
         toppingsGrid.add(topping3, 2, 0);
 
-        Button orderButton = new Button("Place Order");
-        orderButton.setOnAction(e -> handleOrder());
+        // Address Fields
+        Label addressLabel = new Label("Enter Delivery Address:");
+        TextField streetField = new TextField();
+        streetField.setPromptText("Street Address");
+        TextField cityField = new TextField();
+        cityField.setPromptText("City");
+        TextField stateField = new TextField();
+        stateField.setPromptText("State");
+        TextField postalCodeField = new TextField();
+        postalCodeField.setPromptText("Postal Code");
 
-        menuBox.getChildren().addAll(menuLabel, sizeComboBox, toppingLabel, toppingsGrid, orderButton);
+        Button orderButton = new Button("Place Order");
+        orderButton.setOnAction(e -> handleOrder(sizeComboBox.getValue(), topping1.isSelected(), topping2.isSelected(), topping3.isSelected(), streetField.getText(), cityField.getText(), stateField.getText(), postalCodeField.getText()));
+
+        menuBox.getChildren().addAll(menuLabel, sizeComboBox, toppingLabel, toppingsGrid, addressLabel, streetField, cityField, stateField, postalCodeField, orderButton);
         mainLayout.setCenter(menuBox);
     }
 
-    private void handleOrder() {
-        // Handle order logic here
+    private void handleOrder(String size, boolean topping1, boolean topping2, boolean topping3, String street, String city, String state, String postalCode) {
+        if (size == null || size.isEmpty() || (!topping1 && !topping2 && !topping3) || street.isEmpty() || city.isEmpty() || state.isEmpty() || postalCode.isEmpty()) {
+            // Display an error message or prompt the user to fill out all fields
+            System.out.println("Please fill out all fields.");
+            return;
+        }
+        // Proceed with placing the order
         System.out.println("Order placed!");
+        // Include logic for order processing with address details
     }
 }
