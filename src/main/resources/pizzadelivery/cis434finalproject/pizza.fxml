@@ -10,53 +10,49 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="your.package.MainController">
     <top>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="800.0" spacing="20.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label text="Welcome to the Pizza Ordering System!" style="-fx-font-size: 20px; -fx-text-fill: #333;">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Label>
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <children>
-                        <Label text="Select Size:" />
-                        <ComboBox fx:id="sizeComboBox" prefWidth="150.0">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Small - $5" />
-                                    <String fx:value="Medium - $8" />
-                                    <String fx:value="Large - $10" />
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-                    </children>
-                </HBox>
-                <Label text="Choose Toppings:" />
-                <GridPane hgap="10.0" vgap="10.0">
-                    <children>
-                        <CheckBox fx:id="pepperoniCheckbox" text="Pepperoni - $1.00" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <CheckBox fx:id="mushroomsCheckbox" text="Mushrooms - $0.50" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                        <CheckBox fx:id="olivesCheckbox" text="Olives - $0.35" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                    </children>
-                </GridPane>
-                <Button fx:id="orderButton" text="Place Order" style="-fx-background-color: darksalmon; -fx-text-fill: white;" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets bottom="20.0" top="20.0" />
-                    </padding>
-                </Button>
-            </children>
             <padding>
-                <Insets bottom="20.0" left="12.0" right="12.0" top="20.0" />
+                <Insets bottom="20.0" left="12.0" right="12.0" top="20.0"/>
             </padding>
+            <Label text="Welcome to the Pizza Ordering System!" style="-fx-font-size: 20px; -fx-text-fill: #333;">
+                <VBox.margin>
+                    <Insets top="20.0"/>
+                </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Select Size:"/>
+                <ComboBox fx:id="sizeComboBox" prefWidth="150.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Small - $5"/>
+                            <String fx:value="Medium - $8"/>
+                            <String fx:value="Large - $10"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+            <Label text="Choose Toppings:"/>
+            <GridPane hgap="10.0" vgap="10.0">
+                <CheckBox fx:id="pepperoniCheckbox" text="Pepperoni - $1.00" GridPane.columnIndex="0"
+                          GridPane.rowIndex="0"/>
+                <CheckBox fx:id="mushroomsCheckbox" text="Mushrooms - $0.50" GridPane.columnIndex="1"
+                          GridPane.rowIndex="0"/>
+                <CheckBox fx:id="olivesCheckbox" text="Olives - $0.35" GridPane.columnIndex="2"
+                          GridPane.rowIndex="0"/>
+            </GridPane>
+            <Button fx:id="orderButton" text="Place Order"
+                    style="-fx-background-color: darksalmon; -fx-text-fill: white;" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="20.0" top="20.0"/>
+                </padding>
+            </Button>
         </VBox>
     </top>
     <center>
         <VBox fx:id="orderResults" prefHeight="400.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label text="Order Results Will Appear Here" />
-            </children>
             <padding>
-                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
             </padding>
+            <Label text="Order Results Will Appear Here"/>
         </VBox>
     </center>
 </BorderPane>
