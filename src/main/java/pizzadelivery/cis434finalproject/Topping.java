@@ -1,6 +1,6 @@
 package pizzadelivery.cis434finalproject;
 public enum Topping {
-    PEPPERONI(1.00), MUSHROOMS(0.50), OLIVES(0.35);
+    PEPPERONI(1.05), MUSHROOMS(0.55), OLIVES(0.35);
 
     private final double price;
 

@@ -1,5 +1,6 @@
 package pizzadelivery.cis434finalproject;
 
+
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
@@ -21,6 +22,7 @@ public class MenuView {
     private ComboBox<PizzaSize> sizeComboBox = new ComboBox<>();
     private Button addToOrderButton = new Button("Add to Order");
     private Button placeOrderButton = new Button("Place Order");
+    private Button backToLoginButton = new Button("Back to Login"); // Back to login button
     private VBox menuBox;
 
     public MenuView(BorderPane mainLayout, PizzaController controller) {
@@ -51,8 +53,9 @@ public class MenuView {
 
         addToOrderButton.setOnAction(e -> handleAddToOrder(sizeComboBox.getValue(), topping1, topping2, topping3));
         placeOrderButton.setOnAction(e -> showThankYouPage());
+        backToLoginButton.setOnAction(e -> showLoginView());
 
-        menuBox.getChildren().addAll(menuLabel, sizeComboBox, toppingLabel, toppingsGrid, addToOrderButton, placeOrderButton, receiptArea);
+        menuBox.getChildren().addAll(menuLabel, sizeComboBox, toppingLabel, toppingsGrid, addToOrderButton, placeOrderButton, backToLoginButton, receiptArea);
     }
 
     public void displayMenu() {
@@ -68,9 +71,9 @@ public class MenuView {
         }
 
         List<Topping> selectedToppings = new ArrayList<>();
-        if (toppings[0].isSelected()) selectedToppings.add(Topping.PEPPERONI);
-        if (toppings[1].isSelected()) selectedToppings.add(Topping.MUSHROOMS);
-        if (toppings[2].isSelected()) selectedToppings.add(Topping.OLIVES);
+        for (CheckBox topping : toppings) {
+            if (topping.isSelected()) selectedToppings.add(Topping.valueOf(topping.getText().split(" - ")[0]));
+        }
 
         controller.addPizzaToOrder(size, selectedToppings);
         receiptArea.setText(controller.generateReceipt());
@@ -83,23 +86,24 @@ public class MenuView {
         thankYouBox.setStyle("-fx-padding: 20; -fx-alignment: center;");
         double total = controller.calculateOrderTotal(); // Get the total cost of the order
 
-        Label thankYouLabel = new Label("Thank you for placing your order! \n        Your order was $" + String.format("%.2f", total));
-        thankYouLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #FFFFFF;");
+        Label thankYouLabel = new Label("Thank you for placing your order! Your order was $" + String.format("%.2f", total));
+        thankYouLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #FFF;");
 
         Button backButton = new Button("Place Another Order");
         backButton.setOnAction(e -> {
-            controller.resetOrder();  // Reset the order when going back
+            controller.resetOrder();
             displayMenu();
-            resetSelections();  // Ensure the form is cleared
-            addToOrderButton.setDisable(false); // Re-enable adding more to the order
-            placeOrderButton.setDisable(true);  // Keep place order button disabled until new items are added
+            resetSelections();
         });
 
         thankYouBox.getChildren().addAll(thankYouLabel, backButton);
         mainLayout.setCenter(thankYouBox); // Change the central content of the main layout
     }
 
-
+    private void showLoginView() {
+        LoginView loginView = new LoginView(mainLayout, controller);
+        loginView.display();
+    }
 
     private void resetSelections() {
         sizeComboBox.getSelectionModel().clearSelection();

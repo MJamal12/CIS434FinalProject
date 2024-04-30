@@ -1,13 +1,12 @@
-package pizzadelivery.cis434finalproject;
-import javafx.application.Application;
+package pizzadelivery.cis434finalproject;import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 public class MainApplication extends Application {
     private Stage primaryStage;
-    private PizzaController controller;
     private BorderPane mainLayout;
+    private PizzaController controller;
 
     @Override
     public void start(Stage primaryStage) {
@@ -18,16 +17,15 @@ public class MainApplication extends Application {
         mainLayout = new BorderPane();
         Scene scene = new Scene(mainLayout, 800, 600);
 
-        // Apply the CSS
-        scene.getStylesheets().add("style.css"); // Ensure the CSS file is in your resources folder
+        // Load the global stylesheet
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
-        MenuView menuView = new MenuView(mainLayout, controller);
-        menuView.displayMenu();
+        LoginView loginView = new LoginView(mainLayout, controller);
+        loginView.display();
 
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
