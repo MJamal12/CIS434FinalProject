@@ -3,28 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza {
-    private String size;
+    private PizzaSize size;
     private List<Topping> toppings;
-    private double basePrice;
+    private final double basePrice;
 
-    public String getDescription() {
-        StringBuilder description = new StringBuilder();
-        description.append("Size: ").append(size).append(", Toppings: ");
-        if (toppings.isEmpty()) {
-            description.append("None");
-        } else {
-            for (Topping topping : toppings) {
-                description.append(topping.getName()).append(", ");
-            }
-            description.setLength(description.length() - 2);  // Remove the last comma and space
-        }
-        return description.toString();
-    }
-
-    public Pizza(String size, double basePrice) {
+    public Pizza(PizzaSize size) {
         this.size = size;
+        this.basePrice = size.getPrice();
         this.toppings = new ArrayList<>();
-        this.basePrice = basePrice;
     }
 
     public void addTopping(Topping topping) {
@@ -39,13 +25,8 @@ public class Pizza {
         return totalPrice;
     }
 
-    // Getters and Setters
-    public String getSize() {
+    public PizzaSize getSize() {
         return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public List<Topping> getToppings() {

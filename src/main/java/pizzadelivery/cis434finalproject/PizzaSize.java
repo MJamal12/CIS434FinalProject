@@ -1,10 +1,12 @@
 package pizzadelivery.cis434finalproject;
-public enum Topping {
-    PEPPERONI(1.00), MUSHROOMS(0.50), OLIVES(0.35);
+
+
+public enum PizzaSize {
+    SMALL(5), MEDIUM(8), LARGE(10);
 
     private final double price;
 
-    Topping(double price) {
+    PizzaSize(double price) {
         this.price = price;
     }
 

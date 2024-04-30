@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                pizzadelivery.cis434finalproject/pizzadelivery.cis434finalproject.HelloApplication
+                                pizzadelivery.cis434finalproject/pizzadelivery.cis434finalproject.MainApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
