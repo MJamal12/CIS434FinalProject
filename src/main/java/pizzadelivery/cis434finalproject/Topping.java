@@ -1,5 +1,4 @@
 package pizzadelivery.cis434finalproject;
-
 public class Topping {
     private String name;
     private double price;

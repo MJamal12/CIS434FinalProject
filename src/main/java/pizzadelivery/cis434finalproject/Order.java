@@ -1,5 +1,4 @@
 package pizzadelivery.cis434finalproject;
-
 import java.util.List;
 
 public class Order {
@@ -37,4 +36,3 @@ public class Order {
         System.out.println("Total: $" + String.format("%.2f", total));
     }
 }
-
