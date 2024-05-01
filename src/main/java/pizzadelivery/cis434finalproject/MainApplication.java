@@ -27,8 +27,6 @@ public class MainApplication extends Application {
         } catch(Exception e){
             e.printStackTrace();
         }
-
-
         //stage.setTitle("Pizza Ordering System");
         //initMainLayout();
 
